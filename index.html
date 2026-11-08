@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Cinema Milano Facile</title>
+  <meta name="description" content="Film in sala oggi a Milano con orari, voti, cinema per zona e metro, lingua originale e vicino a te.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,400..900;1,62..125,400..900&family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-in">
+      <a href="./" id="home" class="logo" title="Torna alla home">Cinema Milano <em>Facile</em></a>
+      <label class="cerca">
+        <span class="sr-only">Cerca</span>
+        <span data-icon="search"></span>
+        <input id="q" type="search" placeholder="Cerca un film, un attore, un cinema o una fermata…" autocomplete="off">
+      </label>
+    </div>
+  </header>
+
+  <section class="intro wrap">
+    <p class="eyebrow" id="kicker">Milano · oggi al cinema</p>
+    <h1>Cosa c'è al cinema <em>oggi</em> a Milano</h1>
+  </section>
+
+  <div class="toolbar">
+    <div class="wrap">
+      <div class="toolbar-riga">
+        <nav class="tabs" role="tablist" aria-label="Vista">
+          <button role="tab" id="tab-film" aria-selected="true" data-vista="film"><span data-icon="film"></span>Film <span class="tab-n" id="n-film"></span></button>
+          <button role="tab" id="tab-cinema" aria-selected="false" data-vista="cinema"><span data-icon="ticket"></span>Cinema <span class="tab-n" id="n-cinema"></span></button>
+        </nav>
+        <div class="filtri" aria-label="Filtri">
+          <select id="zona" aria-label="Zona"><option value="">Tutte le zone</option></select>
+          <select id="fascia" aria-label="Fascia oraria">
+            <option value="">Tutto il giorno</option>
+            <option value="ora">Da adesso in poi</option>
+            <option value="pomeriggio">Pomeriggio (fino alle 18)</option>
+            <option value="sera">Sera (dalle 18)</option>
+          </select>
+          <select id="tipo" aria-label="Tipo di sala"><option value="">Tutte le sale</option></select>
+          <button id="vo" type="button" class="toggle" aria-pressed="false">Lingua originale</button>
+          <button id="vicino" type="button" class="toggle" aria-pressed="false"><span data-icon="pin"></span><span class="etichetta">Vicino a me</span></button>
+          <button id="mostra-mappa" type="button" class="toggle" aria-pressed="false"><span data-icon="map"></span>Mappa</button>
+        </div>
+      </div>
+      <div class="categorie" id="categorie" role="group" aria-label="Che film ti va di vedere?"></div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <p id="avviso" class="avviso" hidden></p>
+
+    <div class="layout">
+      <section>
+        <div class="testa-lista">
+          <p id="count" class="count" aria-live="polite"></p>
+          <label class="ordina" id="ordina-wrap">Ordina per
+            <select id="ordina">
+              <option value="sale">più programmati</option>
+              <option value="prossimo">prossimo spettacolo</option>
+              <option value="voto">voto medio</option>
+              <option value="critica">voto della critica</option>
+              <option value="pubblico">voto del pubblico</option>
+              <option value="uscita">uscita più recente</option>
+            </select>
+          </label>
+        </div>
+        <div id="trovati" class="trovati" hidden></div>
+        <ul id="list" class="griglia"></ul>
+      </section>
+      <aside id="colonna-mappa" hidden>
+        <div id="map" class="map" aria-label="Mappa dei cinema"></div>
+      </aside>
+    </div>
+
+    <p class="note" id="nota"></p>
+  </main>
+
+  <footer class="wrap footer">Cinema Milano Facile · fatto a Milano</footer>
+
+  <div id="pannello" class="pannello" hidden>
+    <div class="velo" data-chiudi></div>
+    <aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="pannello-titolo" tabindex="-1">
+      <button type="button" class="chiudi" data-chiudi aria-label="Chiudi"><span data-icon="x"></span></button>
+      <div id="pannello-corpo"></div>
+    </aside>
+  </div>
+
+  <button id="altri" type="button" class="altri" hidden></button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="data/cinema.js"></script>
+  <script src="data/programmazione.js" onerror="window.PROGRAMMAZIONE=null"></script>
+  <script src="app.js"></script>
+</body>
+</html>
